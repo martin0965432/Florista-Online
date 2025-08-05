@@ -41,7 +41,7 @@
                                     </div>
                                     <h5 class="card-title mb-2">Ayuda</h5>
                                     <p class="card-text text-muted">¿Tienes dudas o problemas? Aquí puedes encontrar respuestas.</p>
-                                    <a href="#" class="btn btn-success w-75 rounded-pill mt-3">Ir a ayuda</a>
+                                    <a href="{{ route('user.help') }}" class="btn btn-success w-75 rounded-pill mt-3">Ir a ayuda</a>
                                 </div>
                             </div>
                         </div>
@@ -54,7 +54,7 @@
                                     </div>
                                     <h5 class="card-title mb-2">Mi cuenta</h5>
                                     <p class="card-text text-muted">Actualiza tu información personal o cambia tu contraseña.</p>
-                                    <a href="#" class="btn btn-success w-75 rounded-pill mt-3">Ver cuenta</a>
+                                    <a href="{{ route('user.account') }}" class="btn btn-success w-75 rounded-pill mt-3">Mi cuenta</a>
                                 </div>
                             </div>
                         </div>

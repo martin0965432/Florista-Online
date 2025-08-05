@@ -97,6 +97,29 @@ Route::middleware('auth')->group(function () {
     Route::get('/mis-compras', [App\Http\Controllers\UserController::class, 'showPurchases'])->name('user.purchases');
 });
 
+//Rutas para el panel de usuario Actualizar Informacion y contraseñas
+Route::middleware('auth')->group(function () {
+    Route::get('/mi-cuenta', function () {
+        return view('user.account');
+    })->name('user.account');
+
+    Route::put('/mi-cuenta/actualizar', [App\Http\Controllers\UserController::class, 'updateAccount'])->name('user.updateAccount');
+});
+
+//Rutas para el panel de usuario seccion de ayuda
+
+use App\Http\Controllers\UserController;
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/ayuda', function () {
+        return view('user.help');
+    })->name('user.help');
+
+    Route::post('/ayuda/enviar', [UserController::class, 'sendHelp'])->name('user.help.send');
+});
+
+
+
 
 
 
