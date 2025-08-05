@@ -9,6 +9,8 @@ use App\Http\Controllers\ArregloPersonalizadoController;
 use App\Http\Controllers\Admin\FlorController;
 use App\Http\Controllers\TipoArregloController;
 use App\Http\Controllers\CarritoController;
+use App\Http\Controllers\ColorController;
+
 
 
 
@@ -117,6 +119,14 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/ayuda/enviar', [UserController::class, 'sendHelp'])->name('user.help.send');
 });
+
+//Rutas para implementacion de colores en el panel de administracion
+Route::middleware(['auth', 'is_admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::resource('colores', ColorController::class);
+});
+
+
+//Rutas para 
 
 
 

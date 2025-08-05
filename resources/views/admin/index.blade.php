@@ -42,6 +42,19 @@
                 <a href="{{ route('admin.flores.index') }}" class="btn btn-success mt-2">Administrar</a>
             </div>
         </div>
+
+
+    <!-- Card: Administrar colores -->
+<div class="card text-center shadow-sm" style="width: 16rem;">
+    <div class="card-body d-flex flex-column align-items-center">
+        <i class="fa-solid fa-palette fa-3x text-success mb-3"></i>
+        <h5 class="card-title">Administrar Tonos</h5>
+        <a href="{{ route('admin.colores.index') }}" class="btn btn-success mt-2">Ir a sección</a>
+    </div>
+</div>
+
+
+
     </div>
 </div>
 @endsection
