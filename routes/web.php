@@ -8,6 +8,7 @@ use App\Http\Controllers\ArregloController; // 👈 ESTA LÍNEA ES CLAVE
 use App\Http\Controllers\ArregloPersonalizadoController;
 use App\Http\Controllers\Admin\FlorController;
 use App\Http\Controllers\TipoArregloController;
+use App\Http\Controllers\CarritoController;
 
 
 
@@ -32,6 +33,15 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 // Esta ruta puede quedarse fuera del grupo si es pública
 Route::get('/arreglos', [ArregloController::class, 'index']);
+
+Route::get('/carrito', [CarritoController::class, 'ver'])->name('carrito.ver');
+
+
+Route::post('/carrito/agregar', [CarritoController::class, 'agregar'])->name('carrito.agregar');
+
+Route::get('/comprar/{id}', [CarritoController::class, 'comprar'])->name('comprar.directo');
+
+Route::post('/carrito/actualizar/{id}', [CarritoController::class, 'actualizar'])->name('carrito.actualizar');
 
 Route::get('/arreglo-personalizado', [ArregloPersonalizadoController::class, 'index'])->name('arreglo.personalizado');
 
@@ -86,3 +96,9 @@ Route::middleware('auth')->group(function () {
     // Ruta para mis compras (placeholder)
     Route::get('/mis-compras', [App\Http\Controllers\UserController::class, 'showPurchases'])->name('user.purchases');
 });
+
+
+
+
+
+

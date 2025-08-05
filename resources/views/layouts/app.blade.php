@@ -91,6 +91,19 @@
                                 </li>
                             @endif
                         @else
+                            <!-- Botón Ver carrito al lado izquierdo del nombre -->
+                            <li class="nav-item d-flex align-items-center">
+                                <a class="nav-link text-white d-flex align-items-center" href="{{ route('carrito.ver') }}">
+                                    <i class="fa fa-shopping-cart me-2 text-white"></i> Ver carrito
+                                    @php
+                                        $carrito = session('carrito', []);
+                                        $cantidad = array_sum(array_column($carrito, 'cantidad'));
+                                    @endphp
+                                    @if($cantidad > 0)
+                                        <span class="badge bg-danger rounded-pill ms-2">{{ $cantidad }}</span>
+                                    @endif
+                                </a>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

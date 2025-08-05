@@ -66,6 +66,7 @@
                 <div class="card-footer text-center text-muted py-3">
                     Panel de usuario - Florista Online 🌼
                 </div>
+               
             </div>
         </div>
     </div>

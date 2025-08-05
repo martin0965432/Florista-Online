@@ -1,4 +1,11 @@
+
 @extends('layouts.app')
+
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
 
 @section('content')
 <div class="container py-5 position-relative">
@@ -20,7 +27,17 @@
                         <h5 class="card-title text-success fw-semibold">{{ $arreglo->nombre }}</h5>
                         <p class="card-text text-muted">{{ Str::limit($arreglo->descripcion, 50) }}</p>
                         <p class="fw-bold text-dark">${{ number_format($arreglo->precio, 2) }}</p>
-                        <a href="#" class="btn btn-success mt-auto">🛒 Comprar</a>
+
+                        <div class="d-grid gap-2">
+                            {{-- Botón Comprar (compra directa, no agrega al carrito) --}}
+                            <a href="{{ route('comprar.directo', $arreglo->id) }}" class="btn btn-primary">💰 Comprar</a>
+                            {{-- Botón Agregar al carrito --}}
+                            <form action="{{ route('carrito.agregar') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="producto_id" value="{{ $arreglo->id }}">
+                                <button type="submit" class="btn btn-success w-100">🛒 Agregar al carrito</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
