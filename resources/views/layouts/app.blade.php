@@ -104,16 +104,30 @@
                                  </a>
                                  
                                 <div class="dropdown-menu dropdown-menu-end">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                        Cerrar sesión
-                                    </a>
-                                    <a class="dropdown-item" href="{{ url('/home') }}">Panel de usuario</a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                          class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
+    {{-- Opción para cerrar sesión --}}
+    <a class="dropdown-item" href="{{ route('logout') }}"
+       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+        Cerrar sesión
+    </a>
+
+    {{-- Acceso al panel de usuario --}}
+    <a class="dropdown-item" href="{{ url('/home') }}">Panel de usuario</a>
+
+     <a class="dropdown-item" href="{{ url('/arreglo-personalizado')}}">Arreglos Personalizados </a>
+
+
+    {{-- Acceso al panel de administración (solo admins) --}}
+    @if(Auth::check() && Auth::user()->role === 'admin')
+        <a class="dropdown-item" href="{{ url('/admin') }}">Panel administrativo</a>
+
+    @endif
+
+    {{-- Formulario oculto para logout --}}
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+        @csrf
+    </form>
+</div>
+
                             </li>
                         @endguest
                     </ul>
