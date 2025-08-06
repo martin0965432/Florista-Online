@@ -13,6 +13,7 @@ class Pedido extends Model
         'correo_cliente',
         'total',
         'detalles',
+        'estado',
     ];
 
     protected $casts = [

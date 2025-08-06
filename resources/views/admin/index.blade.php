@@ -53,6 +53,15 @@
     </div>
 </div>
 
+    <!-- Card: Administrar pedidos -->
+<div class="card text-center shadow-sm" style="width: 16rem;">
+    <div class="card-body d-flex flex-column align-items-center">
+        <i class="fa-solid fa-user-tie fa-3x text-success mb-3"></i>
+        <h5 class="card-title">Administrar pedidos</h5>
+        <a href="{{ route('admin.pedidos.index') }}" class="btn btn-success mt-2">Ir a sección</a>
+    </div>
+</div>
+
 
 
     </div>

@@ -11,6 +11,7 @@ use App\Http\Controllers\TipoArregloController;
 use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\PagoController;
+use App\Http\Controllers\PedidoAdminController;
 
 
 
@@ -132,10 +133,15 @@ Route::middleware(['auth'])->group(function () {
 //Rutas para implementacion de colores en el panel de administracion
 Route::middleware(['auth', 'is_admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::resource('colores', ColorController::class);
+
+    //Ruta actualizar el estado
+    Route::put('/pedidos/{id}/estado', [PedidoAdminController::class, 'updateEstado'])->name('pedidos.updateEstado');
+
+
+    //Rutas para administrar los pedidos en el middleware
+    Route::get('/pedidos', [PedidoAdminController::class, 'index'])->name('pedidos.index');
+    Route::get('/pedidos/{id}', [PedidoAdminController::class, 'show'])->name('pedidos.show');
 });
-
-
-//Rutas para 
 
 
 

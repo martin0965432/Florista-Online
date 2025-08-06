@@ -13,10 +13,24 @@
                     <div class="row">
                         {{-- Columna izquierda: Detalles del pedido --}}
                         <div class="col-md-4">
-                            <h5 class="mb-2">Numero de pedido #{{ $pedido->id }}</h5>
-                            <p class="mb-1"><strong>Fecha:</strong> {{ $pedido->created_at->format('d M Y, H:i') }}</p>
-                            <p class="mb-1"><strong>Total:</strong> ${{ number_format($pedido->total, 2) }}</p>
-                        </div>
+    <h5 class="mb-2">Pedido #{{ $pedido->id }}</h5>
+    <p class="mb-1"><strong>Fecha:</strong> {{ $pedido->created_at->format('d M Y, H:i') }}</p>
+    <p class="mb-1"><strong>Total:</strong> ${{ number_format($pedido->total, 2) }}</p>
+    <p class="mb-1">
+        <strong>Estado:</strong> 
+        @php
+            $badgeClass = match($pedido->estado) {
+                'En preparación' => 'warning',
+                'En camino'      => 'info',
+                'Entregado'      => 'success',
+                'Cancelado'      => 'danger',
+                default          => 'secondary',
+            };
+        @endphp
+        <span class="badge bg-{{ $badgeClass }}">{{ $pedido->estado }}</span>
+    </p>
+</div>
+
 
                         {{-- Columna derecha: Productos en cards --}}
                         <div class="col-md-8">
