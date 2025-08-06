@@ -58,9 +58,10 @@
             <i class="fa fa-arrow-left me-1"></i> Seguir comprando
         </a>
         @if(!empty($carrito))
-            <a href="#" class="btn btn-success">
-                <i class="fa fa-credit-card me-1"></i> Finalizar compra
-            </a>
+            <a href="{{ route('pago.formulario') }}" class="btn btn-success">
+    <i class="fa fa-credit-card me-1"></i> Finalizar compra
+</a>
+
         @endif
     </div>
 </div>

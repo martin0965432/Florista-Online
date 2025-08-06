@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\FlorController;
 use App\Http\Controllers\TipoArregloController;
 use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\ColorController;
+use App\Http\Controllers\PagoController;
 
 
 
@@ -46,6 +47,10 @@ Route::get('/comprar/{id}', [CarritoController::class, 'comprar'])->name('compra
 Route::post('/carrito/actualizar/{id}', [CarritoController::class, 'actualizar'])->name('carrito.actualizar');
 
 Route::get('/arreglo-personalizado', [ArregloPersonalizadoController::class, 'index'])->name('arreglo.personalizado');
+
+Route::get('/pago', [PagoController::class, 'mostrarFormulario'])->name('pago.formulario');
+
+Route::post('/pago/procesar', [PagoController::class, 'procesarPago'])->name('pago.procesar');
 
 
 // Rutas públicas para ver los arreglos
@@ -97,6 +102,10 @@ Route::middleware('auth')->group(function () {
     
     // Ruta para mis compras (placeholder)
     Route::get('/mis-compras', [App\Http\Controllers\UserController::class, 'showPurchases'])->name('user.purchases');
+
+    //Ruta para gestionar pedidos en el panel de usuario
+    Route::get('/usuario/pedidos', [App\Http\Controllers\PedidoController::class, 'misPedidos'])->name('usuario.pedidos');
+
 });
 
 //Rutas para el panel de usuario Actualizar Informacion y contraseñas

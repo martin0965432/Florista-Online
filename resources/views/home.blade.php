@@ -28,7 +28,7 @@
                                     </div>
                                     <h5 class="card-title mb-2">Mis compras</h5>
                                     <p class="card-text text-muted">Consulta el estado y el historial de tus pedidos.</p>
-                                    <a href="#" class="btn btn-success w-75 rounded-pill mt-3">Ver compras</a>
+                                    <a href="{{ route('usuario.pedidos') }}" class="btn btn-success w-75 rounded-pill mt-3">Ver compras</a>
                                 </div>
                             </div>
                         </div>
