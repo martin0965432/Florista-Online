@@ -2,7 +2,7 @@
 @extends('layouts.app')
 @section('content')
 <div class="container py-4">
-    <h2 class="mb-4 text-warning fw-bold"><i class="fa fa-shopping-cart me-2"></i>Carrito de Compras</h2>
+    <h2 class="mb-4 text-success fw-bold"><i class="fa fa-shopping-cart me-2"></i>Carrito de Compras</h2>
 
     @if(empty($carrito))
         <div class="alert alert-info text-center">
@@ -53,10 +53,10 @@
         </div>
     @endif
 
-    <div class="d-flex gap-2">
-        <a href="{{ url('/') }}" class="btn btn-outline-warning">
-            <i class="fa fa-arrow-left me-1"></i> Seguir comprando
-        </a>
+   <div class="d-flex gap-2">
+    <a href="{{ url('/') }}" class="btn btn-outline-success fw-bold">
+        <i class="fa fa-arrow-left me-1"></i> Seguir comprando
+    </a>
         @if(!empty($carrito))
             <a href="{{ route('pago.formulario') }}" class="btn btn-success">
     <i class="fa fa-credit-card me-1"></i> Finalizar compra

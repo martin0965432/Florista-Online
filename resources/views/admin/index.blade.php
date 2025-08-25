@@ -62,6 +62,16 @@
     </div>
 </div>
 
+<!-- Card: Administrar Usuarios -->
+<div class="card text-center shadow-sm" style="width: 16rem;">
+    <div class="card-body d-flex flex-column align-items-center">
+        <i class="fa-solid fa-users-gear fa-3x text-success mb-3"></i>
+        <h5 class="card-title">Administrar Usuarios</h5>
+        <a href="{{ route('usuarios.index') }}" class="btn btn-success mt-2">Ir a sección</a>
+    </div>
+</div>
+
+
 
 
     </div>

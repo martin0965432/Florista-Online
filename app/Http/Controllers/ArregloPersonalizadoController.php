@@ -3,34 +3,77 @@
 namespace App\Http\Controllers;
 
 use App\Models\Flor;
+use App\Models\TipoArreglo;
+use App\Models\Color;
 use Illuminate\Http\Request;
 
 class ArregloPersonalizadoController extends Controller
 {
-    public function index()
-    {
-        // Obtener todas las flores disponibles
-        $flores = Flor::all();
-        return view('arreglos.personalizados', compact('flores'));
-    }
+   
 
-    public function store(Request $request)
+public function crearPersonalizado()
 {
-    $data = $request->input('flores');
+    $tiposArreglo = TipoArreglo::all();
+    $colores = Color::all();
+    $flores = Flor::all();
+
+    return view('arreglos.personalizados', compact('tiposArreglo', 'colores', 'flores'));
+}
+
+private function calcularPrecioTotal($floresSeleccionadas)
+{
     $totalPrice = 0;
-    
-    // Guardar la selección en la base de datos
-    foreach ($data as $florId => $details) {
+
+    foreach ($floresSeleccionadas as $florId => $details) {
         $flor = Flor::find($florId);
-        $totalPrice += $flor->precio * $details['cantidad'];
-        
-        // Aquí puedes guardar en una tabla de pedidos o pedidos_detalles
-        // Pedido::create([...]);
+        if ($flor && isset($details['cantidad'])) {
+            $totalPrice += $flor->precio * $details['cantidad'];
+        }
     }
 
-    // Puedes redirigir al usuario a una página de confirmación de pedido
-    return redirect()->route('pedido.confirmar')->with('success', 'Tu arreglo personalizado ha sido creado.');
+    return $totalPrice;
 }
+
+
+public function guardar(Request $request)
+{
+    $request->validate([
+        'tipo_arreglo_id' => 'required|exists:tipo_arreglos,id',
+        'color_id' => 'required|exists:colores,id',
+        'flores' => 'required|array|min:1',
+    ]);
+
+    $total = 0;
+    $detallesFlores = [];
+
+    foreach ($request->flores as $florId => $data) {
+        $cantidad = intval($data['cantidad'] ?? 0);
+        if ($cantidad > 0) {
+            $flor = Flor::findOrFail($florId);
+            $total += $flor->precio * $cantidad;
+
+            $detallesFlores[] = [
+                'id' => $flor->id,
+                'nombre' => $flor->nombre,
+                'cantidad' => $cantidad,
+                'precio_unitario' => $flor->precio
+            ];
+        }
+    }
+
+    // Guardar pedido
+    Pedido::create([
+        'user_id' => auth()->id(),
+        'tipo_arreglo_id' => $request->tipo_arreglo_id,
+        'color_id' => $request->color_id,
+        'detalles' => json_encode($detallesFlores),
+        'total' => $total
+    ]);
+
+    return redirect()->route('usuario.pedidos')->with('success', 'Tu arreglo personalizado fue registrado.');
+}
+
+
 
 
 }

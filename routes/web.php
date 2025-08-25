@@ -47,11 +47,14 @@ Route::get('/comprar/{id}', [CarritoController::class, 'comprar'])->name('compra
 
 Route::post('/carrito/actualizar/{id}', [CarritoController::class, 'actualizar'])->name('carrito.actualizar');
 
-Route::get('/arreglo-personalizado', [ArregloPersonalizadoController::class, 'index'])->name('arreglo.personalizado');
-
 Route::get('/pago', [PagoController::class, 'mostrarFormulario'])->name('pago.formulario');
 
 Route::post('/pago/procesar', [PagoController::class, 'procesarPago'])->name('pago.procesar');
+
+Route::get('/arreglo/personalizado', [ArregloPersonalizadoController::class, 'crearPersonalizado'])->name('arreglo.formulario');
+Route::post('/arreglo/personalizado', [ArregloPersonalizadoController::class, 'guardar'])->name('arreglo.personalizado');
+
+
 
 
 // Rutas públicas para ver los arreglos
@@ -67,6 +70,12 @@ Route::middleware(['auth', 'is_admin'])->group(function () {
     // CRUD para arreglos solo accesible por admins
     Route::resource('admin/arreglos', ArregloController::class);
     Route::resource('arreglos', ArregloController::class);
+    //Crud de administracion para roles de usuario
+
+Route::resource('usuarios', \App\Http\Controllers\UserAdminController::class)->only(['index', 'create', 'store', 'destroy']);
+Route::post('usuarios/{user}/hacer-admin', [\App\Http\Controllers\UserAdminController::class, 'hacerAdmin'])->name('usuarios.hacerAdmin');
+Route::post('usuarios/{user}/quitar-admin', [\App\Http\Controllers\UserAdminController::class, 'quitarAdmin'])->name('usuarios.quitarAdmin');
+
 
 });
 

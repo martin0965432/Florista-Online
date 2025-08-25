@@ -126,7 +126,7 @@
     {{-- Acceso al panel de usuario --}}
     <a class="dropdown-item" href="{{ url('/home') }}">Panel de usuario</a>
 
-     <a class="dropdown-item" href="{{ url('/arreglo-personalizado')}}">Arreglos Personalizados </a>
+     <a class="dropdown-item" href="{{ route('arreglo.formulario') }}">Arreglos Personalizados </a>
 
 
     {{-- Acceso al panel de administración (solo admins) --}}
